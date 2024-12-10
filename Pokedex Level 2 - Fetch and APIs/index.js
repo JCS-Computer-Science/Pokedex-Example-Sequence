@@ -19,13 +19,13 @@ function addPokemon(name, num) {
 	list.appendChild(newPokemon);
 }
 
-fetch("https://pokeapi.co/api/v2/pokemon/?limit=151")
-	.then(function (response) {
-		return response.json();
-	})
-	.then(function (data) {
-		console.log(data.results);
-		for (let i = 0; i < data.results.length; i++) {
-			addPokemon(data.results[i].name, i + 1);
-		}
-	});
+async function getData(){
+	let response = await fetch("https://pokeapi.co/api/v2/pokemon/?limit=151")
+	let data = await response.json()
+	
+	console.log(data);
+	for (let i = 0; i < data.results.length; i++) {
+		addPokemon(data.results[i].name, i + 1);
+	}
+}
+getData()
